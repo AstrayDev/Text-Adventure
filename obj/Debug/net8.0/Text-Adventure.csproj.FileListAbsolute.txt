@@ -1,0 +1,17 @@
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Text-Adventure.exe
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Text-Adventure.deps.json
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Text-Adventure.runtimeconfig.json
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Text-Adventure.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Text-Adventure.pdb
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.AssemblyInfoInputs.cache
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.AssemblyInfo.cs
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.csproj.CoreCompileInputs.cache
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\refint\Text-Adventure.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.pdb
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.genruntimeconfig.cache
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\ref\Text-Adventure.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.csproj.AssemblyReference.cache
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adv.8934EA9F.Up2Date
