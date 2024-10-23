@@ -15,3 +15,4 @@ C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\ref\Tex
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.csproj.AssemblyReference.cache
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adv.8934EA9F.Up2Date
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.sourcelink.json

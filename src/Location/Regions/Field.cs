@@ -5,13 +5,16 @@ namespace TextAdventure.Location;
 
 public class Field : Region
 {
+
     public Field(string name, Position startPosition, int x, int y) : base(name, startPosition, x, y)
     {
         AddRoom
         (
             new Position(startPosition.X, startPosition.Y),
             new Room([Directions.North],
-            "A large opening with flowers and a nearby lake"));
+            "A large opening with flowers and a nearby lake",
+            new Scene("src/Dialogue.json"))
+        );
 
         AddRoom
         (

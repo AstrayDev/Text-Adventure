@@ -1,4 +1,21 @@
 {
-    "Bill": "Get the reeses",
-    "John": "No"
+    "dialogue": 
+    [
+        {
+            "name": "bob",
+            "text": "Hello"
+        },
+        {
+            "name": "tom",
+            "text": "bye"
+        },
+        {
+            "name": "joe",
+            "text": "whats up y'all"
+        },
+        {
+            "name": "tom",
+            "text": "not much"
+        }
+    ]
 }
