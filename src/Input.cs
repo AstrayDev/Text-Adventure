@@ -17,7 +17,7 @@ public static class Input
     {
         Position pointToMove = player.Position;
         Directions directionToMove = Directions.North;
-        string? input = Console.ReadLine();
+        string? input = Console.ReadLine().ToLower();
 
         switch (input)
         {
@@ -46,7 +46,7 @@ public static class Input
             break;
         }
 
-        if (player.CurrentRegion.Rooms[player.Position.X][player.Position.Y].Exits.Contains(directionToMove))
+        if (player.GetCurrentRoom().Exits.Contains(directionToMove))
         {
             player.Move(pointToMove);
         }

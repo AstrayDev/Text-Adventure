@@ -12,9 +12,10 @@ public struct Dialogue
 
 public class Scene
 {
-    public IEnumerable<Dialogue> ST;
+    public IEnumerable<Dialogue> Text;
+    public bool Viewed = false;
 
-    public Scene(string file) { ST = LoadJson(file); }
+    public Scene(string file) { Text = LoadJson(file); }
 
     public IEnumerable<Dialogue> LoadJson(string json)
     {
@@ -37,8 +38,18 @@ public class Scene
         {
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                Console.WriteLine($"{item.Name}: {item.Text}");
+                if (!item.Name.Equals(""))
+                {
+                    Console.WriteLine($"{item.Name}: {item.Text}\n");
+                }
+
+                else
+                {
+                    Console.WriteLine($"{item.Text}\n");
+                }
             }
         }
+
+        Console.ReadLine();
     }
 }

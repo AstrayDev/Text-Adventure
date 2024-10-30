@@ -14,6 +14,12 @@ class Program
 
         while (true)
         {
+            if (player.GetCurrentRoom().ContainsScene() && !player.GetCurrentRoom().SceneViewed())
+            {
+                player.GetCurrentRoom().Scene.StartScene(player.GetCurrentRoom().Scene.Text);
+                player.GetCurrentRoom().Scene.Viewed = true;
+            }
+
             fields.PrintRoomDescription(player.CurrentRegion, player);
             Input.WaitForInput(player);
         }

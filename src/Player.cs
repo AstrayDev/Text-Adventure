@@ -23,4 +23,9 @@ public class Player
     {
         Position = direction;
     }
+
+    public Room GetCurrentRoom()
+    {
+        return CurrentRegion.Rooms[Position.X][Position.Y];
+    }
 }

@@ -20,4 +20,14 @@ public class Room
         Description = description;
         Scene = scene;
     }
+
+    public bool ContainsScene()
+    {
+        return Scene == null ? false : true;
+    }
+
+    public bool SceneViewed()
+    {
+        return Scene.Viewed == false ? false : true;
+    }
 }
