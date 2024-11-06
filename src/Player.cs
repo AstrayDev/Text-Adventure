@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TextAdventure.Location;
 
 namespace TextAdventure.Player;
@@ -6,8 +8,8 @@ public class Player
 {
     public string Name { get; private set; }
     public Position Position { get; private set; }
-    public bool IsInCoversation = false;
     public Region CurrentRegion { get; set; }
+    public List<SceneFlags> Flags = new List<SceneFlags>();
 
     public Player(string name, Position position)
     {

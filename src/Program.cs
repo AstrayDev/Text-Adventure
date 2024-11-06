@@ -14,18 +14,15 @@ class Program
 
         while (true)
         {
-            if (player.GetCurrentRoom().ContainsScene() && !player.GetCurrentRoom().SceneViewed())
+            if (player.GetCurrentRoom().ContainsScene() && player.GetCurrentRoom().Scene.ShouldScenePlay(player))
             {
                 player.GetCurrentRoom().Scene.StartScene(player.GetCurrentRoom().Scene.Text);
                 player.GetCurrentRoom().Scene.Viewed = true;
+                player.Flags.Remove(player.GetCurrentRoom().Scene.Flag);
             }
 
             fields.PrintRoomDescription(player.CurrentRegion, player);
             Input.WaitForInput(player);
         }
-
-        // Scene s = new Scene();
-
-        // s.StartScene(s.LoadJson("src/Dialogue.json"));
     }
 }

@@ -25,9 +25,4 @@ public class Room
     {
         return Scene == null ? false : true;
     }
-
-    public bool SceneViewed()
-    {
-        return Scene.Viewed == false ? false : true;
-    }
 }

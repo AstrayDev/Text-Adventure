@@ -13,7 +13,7 @@ public class Field : Region
             new Position(startPosition.X, startPosition.Y),
             new Room([Directions.North],
             "A large opening with flowers and a nearby lake",
-            new Scene("C:\\Users\\darks\\Documents\\VSCode Projects\\Text-Adventure\\src\\Dialogue.json"))
+            new Scene("C:\\Users\\darks\\Documents\\VSCode Projects\\Text-Adventure\\src\\Scenes\\Dialogue\\Dialogue.json"))
         );
 
         AddRoom

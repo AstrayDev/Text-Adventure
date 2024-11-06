@@ -7,11 +7,18 @@ namespace TextAdventure.Location;
 public abstract class Region
 {
     public string Name { get; private set; }
-    public List<List<Room>> Rooms { get; private set; }
+    public List<List<Room>> Rooms = new List<List<Room>>();
     private Position StartPosition;
     private int MaxX;
     private int MaxY;
 
+    /// <summary>
+    /// Instantiates a new region and sets the rooms list to null to be 
+    /// </summary>
+    /// <param name="name">name of the region</param>
+    /// <param name="startPosition">the starting point for the region</param>
+    /// <param name="maxX">max width</param>
+    /// <param name="maxY">max height</param>
     public Region(string name, Position startPosition, int maxX, int maxY)
     {
         Rooms = new List<List<Room>>(maxX);
