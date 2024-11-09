@@ -13,7 +13,7 @@ public abstract class Region
     private int MaxY;
 
     /// <summary>
-    /// Instantiates a new region and sets the rooms list to null to be 
+    /// Instantiates a new region 
     /// </summary>
     /// <param name="name">name of the region</param>
     /// <param name="startPosition">the starting point for the region</param>
@@ -28,6 +28,7 @@ public abstract class Region
         Name = name;
         StartPosition = startPosition;
 
+        // Needs every item in the list to be null otherwise it'll trow an error
         for (int i = 0; i < maxX; i++)
         {
             Rooms.Add(new List<Room>(maxY));
@@ -54,25 +55,6 @@ public abstract class Region
         catch (ArgumentOutOfRangeException e)
         {
             Console.WriteLine($"Position out of bounds, max is ({MaxX}, {MaxY}), the position you're adding is ({position.X}, {position.Y}).\nProblem{e.StackTrace}. Exiting");
-            Environment.Exit(0);
-        }
-    }
-
-    internal void PrintRoomDescription(Region region, TextAdventure.Player.Player player)
-    {
-        if (region.Rooms[player.Position.X][player.Position.Y] != null)
-        {
-            Console.WriteLine(region.Rooms[player.Position.X][player.Position.Y].Description);
-
-            for (int i = 0; i < region.Rooms[player.Position.X][player.Position.Y].Exits.Length; i++)
-            {
-                Console.WriteLine($"Go {region.Rooms[player.Position.X][player.Position.Y].Exits[i]}");
-            }
-        }
-
-        else
-        {
-            Console.WriteLine($"Room is null, check the {region}.cs file to ensure room placement is correct.\nExiting");
             Environment.Exit(0);
         }
     }

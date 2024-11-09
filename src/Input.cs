@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Spectre.Console;
 using TextAdventure.Location;
 
 namespace TextAdventure.Player;
@@ -15,35 +16,100 @@ public static class Input
     /// <param name="player">The player that's making commands</param>
     public static void WaitForInput(Player player)
     {
-        Position pointToMove = player.Position;
-        Directions directionToMove = Directions.North;
-        string? input = Console.ReadLine().ToLower();
-
-        switch (input)
+        switch(UI.State)
         {
-            case "n":
-            pointToMove.Y++;
-            directionToMove = Directions.North;
+            case UIStates.MainMenu:
+            MainMenuInput();
             break;
 
-            case "w":
-            pointToMove.X--;
-            directionToMove = Directions.West;
+            case UIStates.Action:
+            ActionMenuInput(player);
             break;
 
-            case "e":
-            pointToMove.X++;
-            directionToMove = Directions.East;
-            break;
-
-            case "s":
-            pointToMove.Y--;
-            directionToMove = Directions.South;
+            case UIStates.Move:
+            MoveMenuInput(player);
             break;
 
             default:
-            Console.WriteLine("Invalid input");
+            Console.WriteLine("Unassigned ui state");
             break;
+        }
+    }
+
+    private static void MainMenuInput()
+    {
+        var input = AnsiConsole.Prompt
+        (
+            new SelectionPrompt<string>()
+            .AddChoices("Start Game", "Quit")
+        );
+
+        switch(input)
+        {
+            case "Start Game":
+            UI.SetState(UIStates.Action);
+            break;
+
+            case "Quit":
+            Environment.Exit(0);
+            break;
+
+            default:
+            Console.WriteLine("How did you even mess this up?");
+            break;
+        }
+    }
+
+    private static void ActionMenuInput(Player player)
+    {
+        var input = AnsiConsole.Prompt
+        (
+            new TextPrompt<string>("")
+        ).ToLower();
+
+        switch(input)
+        {
+            case "move":
+            UI.SetState(UIStates.Move);
+            break;
+        }
+    }
+
+    private static void MoveMenuInput(Player player)
+    {
+        Position pointToMove = player.Position;
+        Directions directionToMove = Directions.North;
+        var input = AnsiConsole.Prompt
+        (
+            new TextPrompt<string>("")
+        ).ToLower();
+
+        switch (input)
+        {
+            case "north":
+                pointToMove.Y++;
+                directionToMove = Directions.North;
+                break;
+
+            case "west":
+                pointToMove.X--;
+                directionToMove = Directions.West;
+                break;
+
+            case "east":
+                pointToMove.X++;
+                directionToMove = Directions.East;
+                break;
+
+            case "south":
+                pointToMove.Y--;
+                directionToMove = Directions.South;
+                break;
+
+            default:
+                Console.WriteLine("Invalid input");
+                Console.ReadLine();
+                break;
         }
 
         if (player.GetCurrentRoom().Exits.Contains(directionToMove))
@@ -54,6 +120,12 @@ public static class Input
         else
         {
             Console.WriteLine("Nothing there");
+            Console.ReadLine();
+        }
+
+        if (player.GetCurrentRoom().ContainsScene() && player.GetCurrentRoom().Scene.ShouldScenePlay(player))
+        {
+            UI.SetState(UIStates.Scene);
         }
     }
 }

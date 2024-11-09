@@ -52,24 +52,4 @@ public class Scene
 
         return (player.Flags.Contains(Flag) || Flag == SceneFlags.Null) ? true : false;
     }
-    public void StartScene(IEnumerable<Dialogue> json)
-    {
-        foreach (var item in json)
-        {
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
-            {
-                if (!item.Name.Equals(""))
-                {
-                    Console.WriteLine($"{item.Name}: {item.Text}\n");
-                }
-
-                else
-                {
-                    Console.WriteLine($"{item.Text}\n");
-                }
-            }
-        }
-
-        Console.ReadLine();
-    }
 }
