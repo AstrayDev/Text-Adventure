@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,10 +13,8 @@ public struct Dialogue
 public class Scene
 {
     public IEnumerable<Dialogue> Text;
-    public SceneFlags Flag = SceneFlags.Null;
-    public bool Viewed = false;
+    public SceneFlags Flag;
 
-    public Scene(string file) => Text = LoadJson(file);
     public Scene(string file, SceneFlags flag)
     {
         Text = LoadJson(file);
@@ -45,11 +42,6 @@ public class Scene
     }
     public bool ShouldScenePlay(Player player)
     {
-        if (Viewed == true)
-        {
-            return false;
-        }
-
-        return (player.Flags.Contains(Flag) || Flag == SceneFlags.Null) ? true : false;
+        return player.Flags.Contains(Flag) && player.GetCurrentRoom().ContainsScene() ? true : false;
     }
 }

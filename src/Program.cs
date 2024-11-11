@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using TextAdventure.Location;
+using Region = TextAdventure.Location.Region;
 using TextAdventure.Player;
 
 class Program
@@ -10,20 +9,8 @@ class Program
     {
         Region fields = new Field("Fields", new Position(0, 0), 5, 5);
         Player player = new Player("John", new Position(0, 0));
+        player.Flags.Add(SceneFlags.FieldsIntro);
         player.CurrentRegion = fields;
-
-        // while (true)
-        // {
-        //     if (player.GetCurrentRoom().ContainsScene() && player.GetCurrentRoom().Scene.ShouldScenePlay(player))
-        //     {
-        //         player.GetCurrentRoom().Scene.StartScene(player.GetCurrentRoom().Scene.Text);
-        //         player.GetCurrentRoom().Scene.Viewed = true;
-        //         player.Flags.Remove(player.GetCurrentRoom().Scene.Flag);
-        //     }
-
-        //     player.GetCurrentRoom().PrintRoomDescription();
-        //     Input.WaitForInput(player);
-        // }
 
         while (true)
         {

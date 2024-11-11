@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
 namespace TextAdventure.Location;
 
 public class Field : Region
@@ -11,16 +8,22 @@ public class Field : Region
         AddRoom
         (
             new Position(startPosition.X, startPosition.Y),
-            new Room([Directions.North],
-            "A large opening with flowers and a nearby lake",
-            new Scene("C:\\Users\\darks\\Documents\\VSCode Projects\\Text-Adventure\\src\\Scenes\\Dialogue\\Dialogue.json"))
-        );
+            new Room
+            (
+            [Directions.North],
+            "A large opening with flowers and a nearby lake")
+            );
 
         AddRoom
         (
             new Position(0, 1),
             new Room([Directions.South, Directions.East],
-            "A small alcove with vines and overgrowth")
+            "A small alcove with vines and overgrowth",
+            new Scene
+            (
+                "C:\\Users\\darks\\Documents\\VSCode Projects\\Text-Adventure\\src\\Scenes\\Dialogue\\Dialogue.json",
+                 SceneFlags.FieldsIntro
+            ))
         );
 
         AddRoom

@@ -1,7 +1,6 @@
-using System;
-
 public enum Directions
 {
+    Null,
     North,
     South,
     West,

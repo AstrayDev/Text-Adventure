@@ -23,7 +23,7 @@ public static class Input
             break;
 
             case UIStates.Action:
-            ActionMenuInput(player);
+            ActionMenuInput();
             break;
 
             case UIStates.Move:
@@ -41,12 +41,12 @@ public static class Input
         var input = AnsiConsole.Prompt
         (
             new SelectionPrompt<string>()
-            .AddChoices("Start Game", "Quit")
+            .AddChoices("New Game", "Quit")
         );
 
         switch(input)
         {
-            case "Start Game":
+            case "New Game":
             UI.SetState(UIStates.Action);
             break;
 
@@ -60,7 +60,7 @@ public static class Input
         }
     }
 
-    private static void ActionMenuInput(Player player)
+    private static void ActionMenuInput()
     {
         var input = AnsiConsole.Prompt
         (
@@ -78,7 +78,7 @@ public static class Input
     private static void MoveMenuInput(Player player)
     {
         Position pointToMove = player.Position;
-        Directions directionToMove = Directions.North;
+        Directions directionToMove = Directions.Null;
         var input = AnsiConsole.Prompt
         (
             new TextPrompt<string>("")
@@ -115,12 +115,7 @@ public static class Input
         if (player.GetCurrentRoom().Exits.Contains(directionToMove))
         {
             player.Move(pointToMove);
-        }
-
-        else
-        {
-            Console.WriteLine("Nothing there");
-            Console.ReadLine();
+            UI.SetState(UIStates.Action);
         }
 
         if (player.GetCurrentRoom().ContainsScene() && player.GetCurrentRoom().Scene.ShouldScenePlay(player))

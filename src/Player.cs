@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TextAdventure.Location;
 
@@ -9,6 +8,7 @@ public class Player
     public string Name { get; private set; }
     public Position Position { get; private set; }
     public Region CurrentRegion { get; set; }
+    public bool InGame = false;
     public List<SceneFlags> Flags = new List<SceneFlags>();
 
     public Player(string name, Position position)

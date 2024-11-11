@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
-using Microsoft.VisualBasic;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 using TextAdventure.Player;
@@ -22,20 +20,26 @@ public static class UI
     public static UIStates? State { get; private set; } = StateList[StateList.Count - 1];
     public static IRenderable CurrentUI { get; private set; }
 
-    public static void SetState(UIStates? state)
+    public static void SetState(UIStates state)
     {
-        if (state != null)
+        if (Enum.IsDefined(typeof(UIStates), state))
         {
             State = state;
         }
         else
         {
-            Console.WriteLine("State is null");
+            Console.WriteLine("State doesn't exist");
         }
     }
 
     public static void Draw(Player player)
     {
+        if (State != UIStates.Scene && State != UIStates.MainMenu)
+        {
+            var panel = new Panel(player.GetCurrentRoom().Description);
+            panel.Padding(2,2,2,2);
+            AnsiConsole.Write(panel);
+        }
         switch (State)
         {
             case UIStates.MainMenu:
@@ -52,6 +56,8 @@ public static class UI
 
             case UIStates.Scene:
                 DrawScene(player.GetCurrentRoom().Scene.Text);
+                player.Flags.Remove(player.GetCurrentRoom().Scene.Flag);
+                CurrentUI = DrawActionMenu();
                 break;
         }
         AnsiConsole.Write(CurrentUI);
@@ -86,7 +92,7 @@ public static class UI
             str.Append($"Go {player.GetCurrentRoom().Exits[i]}\n");
         };
 
-        table.AddColumn(new TableColumn(player.GetCurrentRoom().Description)).Centered();
+        table.AddColumn(new TableColumn("Choose a direction")).Centered();
         table.AddRow(new Markup(str.ToString()));
         table.Border = TableBorder.Simple;
 
@@ -95,24 +101,22 @@ public static class UI
 
     private static void DrawScene(IEnumerable<Dialogue> json)
     {
+        Console.ReadLine();
+
         foreach (var item in json)
         {
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
+            if (!item.Name.Equals(""))
             {
-                if (!item.Name.Equals(""))
-                {
-                    Console.WriteLine($"{item.Name}: {item.Text}\n");
-                }
-
-                else
-                {
-                    Console.WriteLine($"{item.Text}\n");
-                }
-
+                Console.WriteLine($"{item.Name}: {item.Text}\n");
             }
-        }
 
+            else
+            {
+                Console.WriteLine($"{item.Text}\n");
+            }
+
+            Console.ReadLine();
+        }
         State = UIStates.Action;
-        Console.ReadLine();
     }
 }

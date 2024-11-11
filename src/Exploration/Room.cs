@@ -1,5 +1,3 @@
-using System;
-
 namespace TextAdventure.Location;
 
 public class Room

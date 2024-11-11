@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TextAdventure.Player;
 
 namespace TextAdventure.Location;
 
