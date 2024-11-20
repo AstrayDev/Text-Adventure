@@ -21,7 +21,7 @@ public class Field : Region
             "A small alcove with vines and overgrowth",
             new Scene
             (
-                "C:\\Users\\darks\\Documents\\VSCode Projects\\Text-Adventure\\src\\Scenes\\Dialogue\\Dialogue.json",
+                "src\\Scenes\\Dialogue\\Dialogue.json",
                  SceneFlags.FieldsIntro
             ))
         );

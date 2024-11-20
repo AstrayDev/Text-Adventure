@@ -16,23 +16,23 @@ public static class Input
     /// <param name="player">The player that's making commands</param>
     public static void WaitForInput(Player player)
     {
-        switch(UI.State)
+        switch (UI.State)
         {
             case UIStates.MainMenu:
-            MainMenuInput();
-            break;
+                MainMenuInput();
+                break;
 
             case UIStates.Action:
-            ActionMenuInput();
-            break;
+                ActionMenuInput();
+                break;
 
             case UIStates.Move:
-            MoveMenuInput(player);
-            break;
+                MoveMenuInput(player);
+                break;
 
             default:
-            Console.WriteLine("Unassigned ui state");
-            break;
+                Console.WriteLine("Unassigned ui state");
+                break;
         }
     }
 
@@ -44,19 +44,19 @@ public static class Input
             .AddChoices("New Game", "Quit")
         );
 
-        switch(input)
+        switch (input)
         {
             case "New Game":
-            UI.SetState(UIStates.Action);
-            break;
+                UI.SetState(UIStates.Action);
+                break;
 
             case "Quit":
-            Environment.Exit(0);
-            break;
+                Environment.Exit(0);
+                break;
 
             default:
-            Console.WriteLine("How did you even mess this up?");
-            break;
+                Console.WriteLine("How did you even mess this up?");
+                break;
         }
     }
 
@@ -67,11 +67,11 @@ public static class Input
             new TextPrompt<string>("")
         ).ToLower();
 
-        switch(input)
+        switch (input)
         {
             case "move":
-            UI.SetState(UIStates.Move);
-            break;
+                UI.SetState(UIStates.Move);
+                break;
         }
     }
 

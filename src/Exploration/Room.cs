@@ -3,12 +3,8 @@ namespace TextAdventure.Location;
 public class Room
 {
     public Directions[] Exits { get; private set; }
-    private string m_description;
-    public string Description
-    {
-        get { return this != null ? m_description : "Room is null"; }
-        private set {m_description = value; }
-    }
+    public readonly Region ConnectedRegion;
+    public readonly string Description;
     public Scene Scene { get; private set; }
 
     /// <summary>
@@ -20,7 +16,7 @@ public class Room
     public Room(Directions[] exits, string description, Scene scene = null)
     {
         Exits = exits;
-        m_description = description;
+        Description = description;
         Scene = scene;
     }
 

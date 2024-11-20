@@ -6,7 +6,7 @@ namespace TextAdventure.Player;
 public class Player
 {
     public string Name { get; private set; }
-    public Position Position { get; private set; }
+    public Position Position { get;  set; }
     public Region CurrentRegion { get; set; }
     public bool InGame = false;
     public List<SceneFlags> Flags = new List<SceneFlags>();

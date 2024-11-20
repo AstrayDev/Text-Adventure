@@ -85,15 +85,15 @@ public static class UI
     private static IRenderable DrawMoveMenu(Player player)
     {
         var table = new Table();
-        StringBuilder str = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < player.GetCurrentRoom().Exits.Length; i++)
         {
-            str.Append($"Go {player.GetCurrentRoom().Exits[i]}\n");
+            sb.Append($"Go {player.GetCurrentRoom().Exits[i]}\n");
         };
 
         table.AddColumn(new TableColumn("Choose a direction")).Centered();
-        table.AddRow(new Markup(str.ToString()));
+        table.AddRow(new Markup(sb.ToString()));
         table.Border = TableBorder.Simple;
 
         return table;
