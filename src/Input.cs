@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Spectre.Console;
 using TextAdventure.Location;
+using TextAdventure.Interactibles;
 
 namespace TextAdventure.Player;
 
@@ -26,8 +27,16 @@ public static class Input
                 ActionMenuInput();
                 break;
 
+            case UIStates.Examine:
+                ExamineMenuInput(player);
+                break;
+
             case UIStates.Move:
                 MoveMenuInput(player);
+                break;
+
+            case UIStates.AreaTransition:
+                AreaTransitionInput();
                 break;
 
             default:
@@ -72,13 +81,46 @@ public static class Input
             case "move":
                 UI.SetState(UIStates.Move);
                 break;
+
+            case "examine":
+                UI.SetState(UIStates.Examine);
+                break;
         }
+    }
+
+    private static void ExamineMenuInput(Player player)
+    {
+        if (player.GetCurrentRoom().Items.Count - 1 > 0)
+        {
+            var input = AnsiConsole.Prompt
+            (
+                new TextPrompt<string>("")
+            ).ToLower();
+
+            var item = player.GetCurrentRoom().Items.FirstOrDefault(i => (i as Item).Name.ToLower() == input);
+
+            if (item != null)
+            {
+                item.Interact();
+                player.GetCurrentRoom().Items.Remove(item);
+            }
+        }
+
+        Console.ReadLine();
+        UI.SetState(UIStates.Action);
+    }
+
+    private static void AreaTransitionInput()
+    {
+        Console.ReadLine();
+        UI.SetState(UIStates.Action);
     }
 
     private static void MoveMenuInput(Player player)
     {
         Position pointToMove = player.Position;
         Directions directionToMove = Directions.Null;
+
         var input = AnsiConsole.Prompt
         (
             new TextPrompt<string>("")
@@ -106,6 +148,10 @@ public static class Input
                 directionToMove = Directions.South;
                 break;
 
+            case "leave":
+                directionToMove = Directions.AreaChange;
+                break;
+
             default:
                 Console.WriteLine("Invalid input");
                 Console.ReadLine();
@@ -114,6 +160,12 @@ public static class Input
 
         if (player.GetCurrentRoom().Exits.Contains(directionToMove))
         {
+            if (directionToMove == Directions.AreaChange)
+            {
+                player.ChangeRegion(player.GetCurrentRoom().ConnectedRegion.ToString());
+                UI.SetState(UIStates.AreaTransition);
+                return;
+            }
             player.Move(pointToMove);
             UI.SetState(UIStates.Action);
         }

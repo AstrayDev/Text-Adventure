@@ -7,7 +7,7 @@ public abstract class Region
 {
     public string Name { get; private set; }
     public List<List<Room>> Rooms = new List<List<Room>>();
-    private Position StartPosition;
+    public readonly Position StartPosition;
     private int MaxX;
     private int MaxY;
 

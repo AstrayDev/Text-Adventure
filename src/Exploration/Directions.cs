@@ -4,5 +4,6 @@ public enum Directions
     North,
     South,
     West,
-    East
+    East,
+    AreaChange
 }

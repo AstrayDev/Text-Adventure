@@ -1,11 +1,16 @@
+using System;
+using System.Collections.Generic;
+using TextAdventure.Interactibles;
+
 namespace TextAdventure.Location;
 
 public class Room
 {
     public Directions[] Exits { get; private set; }
-    public readonly Region ConnectedRegion;
+    public readonly OverWorld.RegionTable ConnectedRegion;
     public readonly string Description;
     public Scene Scene { get; private set; }
+    public List<IInteractable> Items { get; private set; } = new List<IInteractable>();
 
     /// <summary>
     /// Make a new room
@@ -18,6 +23,21 @@ public class Room
         Exits = exits;
         Description = description;
         Scene = scene;
+    }
+
+    public Room(Directions[] exits, string description, OverWorld.RegionTable connectedRegion)
+    {
+        Exits = exits;
+        Description = description;
+        ConnectedRegion = connectedRegion;
+    }
+
+    public Room(Directions[] exits, string description, List<IInteractable> items)
+    {
+        Exits = exits;
+        Description = description;
+        Items = items;
+        Items.Add(new Potion("", ""));
     }
 
     public bool ContainsScene()

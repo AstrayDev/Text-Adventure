@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using TextAdventure.Interactibles;
+
 namespace TextAdventure.Location;
 
-public class Field : Region
+public class Fields : Region
 {
 
-    public Field(string name, Position startPosition, int x, int y) : base(name, startPosition, x, y)
+    public Fields(string name, Position startPosition, int x, int y) : base(name, startPosition, x, y)
     {
         AddRoom
         (
@@ -11,8 +14,12 @@ public class Field : Region
             new Room
             (
             [Directions.North],
-            "A large opening with flowers and a nearby lake")
-            );
+            "A large opening with flowers and a nearby lake",
+            new List<IInteractable>
+            {
+                new Potion("Potion", "Heals you")
+            })
+        );
 
         AddRoom
         (
@@ -29,8 +36,9 @@ public class Field : Region
         AddRoom
         (
             new Position(1, 1),
-            new Room([Directions.West],
-            "Near A shore with crashing waves")
+            new Room([Directions.West, Directions.AreaChange],
+            "Near A shore with crashing waves",
+            OverWorld.RegionTable.Mountains)
         );
     }
 }

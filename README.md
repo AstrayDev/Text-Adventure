@@ -6,7 +6,7 @@
 
 - [x] Basic movment through areas
 - [x] Dialogue System
-- [ ] Interconnected regions
+- [x] Interconnected regions
 - [ ] Branching dialogue
 - [ ] Items
 - [ ] Towns

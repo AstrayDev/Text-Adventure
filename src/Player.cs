@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Authentication.ExtendedProtection;
 using TextAdventure.Location;
 
 namespace TextAdventure.Player;
@@ -8,7 +9,6 @@ public class Player
     public string Name { get; private set; }
     public Position Position { get;  set; }
     public Region CurrentRegion { get; set; }
-    public bool InGame = false;
     public List<SceneFlags> Flags = new List<SceneFlags>();
 
     public Player(string name, Position position)
@@ -24,6 +24,24 @@ public class Player
     public void Move(Position direction)
     {
         Position = direction;
+    }
+
+    public void ChangeRegion(string region)
+    {
+        Region newRegion = null;
+        switch (region)
+        {
+            case "Fields":
+               newRegion = new Fields("Fields", new Position(0, 0), 5, 5);
+            break;
+
+            case "Mountains":
+                newRegion = new Mountains("Mountains", new Position(0, 0), 5, 5);
+            break;
+        }
+
+        CurrentRegion = newRegion;
+        Position = newRegion.StartPosition;
     }
 
     public Room GetCurrentRoom()
