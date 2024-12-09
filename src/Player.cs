@@ -1,20 +1,40 @@
+using System;
 using System.Collections.Generic;
-using System.Security.Authentication.ExtendedProtection;
+using Newtonsoft.Json;
+using TextAdventure.Interactibles;
 using TextAdventure.Location;
 
 namespace TextAdventure.Player;
 
+[Serializable]
 public class Player
 {
-    public string Name { get; private set; }
-    public Position Position { get;  set; }
+    public string Name { get; set; }
+    public Position Position { get; set; }
+    public Position PreviousPosition { get; set; }
+    public string CurrentRegionName { get; set; }
+    [JsonIgnore]
     public Region CurrentRegion { get; set; }
-    public List<SceneFlags> Flags = new List<SceneFlags>();
+    [JsonIgnore]
+    public Room CurrentRoom { get; set; }
+    public List<SceneFlags>? Flags = new List<SceneFlags>();
+    [JsonIgnore]
+    public List<Item> Items = new List<Item>();
+
+    public Player()
+    {
+    }
 
     public Player(string name, Position position)
     {
         Name = name;
         Position = position;
+    }
+
+    public void LoadSetup(bool loadUp)
+    {
+        ChangeRegion(CurrentRegionName, loadUp);
+        CurrentRoom = CurrentRegion.Rooms[Position.X][Position.Y];
     }
 
     /// <summary>
@@ -23,29 +43,31 @@ public class Player
     /// <param name="direction">Direction to move in</param>
     public void Move(Position direction)
     {
+        PreviousPosition = Position;
         Position = direction;
+        CurrentRoom = CurrentRegion.Rooms[Position.X][Position.Y];
     }
 
-    public void ChangeRegion(string region)
+    public void ChangeRegion(string region, bool loadUp)
     {
         Region newRegion = null;
         switch (region)
         {
             case "Fields":
-               newRegion = new Fields("Fields", new Position(0, 0), 5, 5);
-            break;
+                newRegion = new Fields("Fields", new Position(0, 0), 5, 5);
+                break;
 
             case "Mountains":
                 newRegion = new Mountains("Mountains", new Position(0, 0), 5, 5);
-            break;
+                break;
         }
 
         CurrentRegion = newRegion;
-        Position = newRegion.StartPosition;
-    }
-
-    public Room GetCurrentRoom()
-    {
-        return CurrentRegion.Rooms[Position.X][Position.Y];
+        CurrentRegionName = CurrentRegion.Name;
+        if (!loadUp)
+        {
+            Position = newRegion.StartPosition;
+        }
+        CurrentRoom = newRegion.Rooms[Position.X][Position.Y];
     }
 }

@@ -42,6 +42,6 @@ public class Scene
     }
     public bool ShouldScenePlay(Player player)
     {
-        return player.Flags.Contains(Flag) && player.GetCurrentRoom().ContainsScene() ? true : false;
+        return player.Flags.Contains(Flag) && player.CurrentRoom.ContainsScene() ? true : false;
     }
 }

@@ -8,7 +8,7 @@
 - [x] Dialogue System
 - [x] Interconnected regions
 - [ ] Branching dialogue
-- [ ] Items
+- [x] Items
 - [ ] Towns
 - [ ] Combat
 

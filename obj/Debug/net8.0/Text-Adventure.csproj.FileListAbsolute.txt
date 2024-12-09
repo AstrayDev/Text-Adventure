@@ -17,3 +17,4 @@ C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Ad
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adv.8934EA9F.Up2Date
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\obj\Debug\net8.0\Text-Adventure.sourcelink.json
 C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\Spectre.Console.dll
+C:\Users\darks\Documents\VSCode Projects\Text-Adventure\bin\Debug\net8.0\src\Scenes\Dialogue\Dialogue.json

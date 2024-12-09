@@ -2,9 +2,9 @@ using System;
 
 namespace TextAdventure.Interactibles;
 
-public class Potion : Item
+public class Stone : Examinable
 {
-    public Potion(string name, string description) : base(name, description)
+    public Stone(string name, string description) : base(name, description)
     {
     }
 

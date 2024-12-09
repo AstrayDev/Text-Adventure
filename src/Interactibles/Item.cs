@@ -4,8 +4,8 @@ namespace TextAdventure.Interactibles;
 
 public class Item : IInteractable
 {
-    public string Name { get; init; }
-    public string Description { get; init; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 
     public Item(string name, string description)
     {

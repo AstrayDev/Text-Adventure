@@ -1,0 +1,10 @@
+"filename", "language", "C#", "JSON", "comment", "blank", "total"
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Room.cs", "C#", 1, 0, 0, 0, 1
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Input.cs", "C#", 41, 0, 0, 8, 49
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\Examinables\Stone.cs", "C#", -2, 0, 0, -1, -3
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Player.cs", "C#", 17, 0, 0, 2, 19
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Program.cs", "C#", -1, 0, 0, 0, -1
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\SaveManager.cs", "C#", 38, 0, 0, 7, 45
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Saves\PlayerSave.json", "JSON", 0, 13, 0, 0, 13
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\UI.cs", "C#", 13, 0, 0, 4, 17
+"Total", "-", 107, 13, 0, 20, 140

@@ -13,12 +13,14 @@ public enum UIStates
     Move,
     AreaTransition,
     Examine,
-    Scene
+    Inventory,
+    Scene,
+    Menu
 }
 
 public static class UI
 {
-    public static UIStates? State { get; private set; } = UIStates.MainMenu;
+    public static UIStates State { get; private set; } = UIStates.MainMenu;
     public static IRenderable CurrentUI { get; private set; }
 
     public static void SetState(UIStates state)
@@ -37,8 +39,7 @@ public static class UI
     {
         if (State != UIStates.Scene && State != UIStates.MainMenu)
         {
-            var panel = new Panel(player.GetCurrentRoom().Description);
-            panel.Padding(2, 2, 2, 2);
+            var panel = new Panel(player.CurrentRoom.Description);
             AnsiConsole.Write(panel);
         }
         switch (State)
@@ -59,13 +60,21 @@ public static class UI
                 CurrentUI = DrawExamineMenu(player);
                 break;
 
+            case UIStates.Inventory:
+                CurrentUI = DrawInventoryMenu(player);
+                break;
+
             case UIStates.AreaTransition:
                 CurrentUI = DrawAreaTransition(player);
                 break;
 
+            case UIStates.Menu:
+                CurrentUI = DrawMenu(player);
+                break;
+
             case UIStates.Scene:
-                DrawScene(player.GetCurrentRoom().Scene.Text);
-                player.Flags.Remove(player.GetCurrentRoom().Scene.Flag);
+                DrawScene(player.CurrentRoom.Scene.Text);
+                player.Flags.Remove(player.CurrentRoom.Scene.Flag);
                 CurrentUI = DrawActionMenu();
                 break;
         }
@@ -76,7 +85,7 @@ public static class UI
     {
         var table = new Table();
 
-        table.AddColumn("Game").Centered();
+        table.AddColumn("Game");
         table.Border = TableBorder.Double;
 
         return table;
@@ -85,9 +94,11 @@ public static class UI
     private static IRenderable DrawActionMenu()
     {
         var table = new Table();
-        table.AddColumn(new TableColumn("Choose an action")).Centered();
+        table.AddColumn(new TableColumn("Choose an action"));
         table.AddRow("Move");
         table.AddRow("Examine");
+        table.AddRow("Inventory");
+        table.AddRow("Menu");
 
         return table;
     }
@@ -96,12 +107,13 @@ public static class UI
     {
         var table = new Table();
 
-        if (player.GetCurrentRoom().Items.Count - 1 > 0)
+        if (player.CurrentRoom.Items.Count > 0)
         {
-            table.AddColumn(new TableColumn("Examine which item").Centered());
-            for (int i = 1; i < player.GetCurrentRoom().Items.Count; i++)
+            table.AddColumn(new TableColumn("Examine which item? Enter back to exit"));
+
+            for (int i = 0; i < player.CurrentRoom.Items.Count; i++)
             {
-                table.AddRow(player.GetCurrentRoom().Items[i].ToString().Substring(28));
+                table.AddRow(player.CurrentRoom.Items[i].ToString().Substring(28));
             }
         }
 
@@ -113,22 +125,42 @@ public static class UI
         return table;
     }
 
+    private static IRenderable DrawInventoryMenu(Player player)
+    {
+        var table = new Table();
+        table.AddColumn("Inventory");
+
+        if (player.Items.Count > 0)
+        {
+            for (int i = 0; i < player.Items.Count; i++)
+            {
+                table.AddRow(player.Items[i].ToString().Substring(28));
+            }
+        }
+        else
+        {
+            return new Panel("No items");
+        }
+
+        return table;
+    }
+
     private static IRenderable DrawMoveMenu(Player player)
     {
         var table = new Table();
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < player.GetCurrentRoom().Exits.Length; i++)
+        for (int i = 0; i < player.CurrentRoom.Exits.Length; i++)
         {
-            if (player.GetCurrentRoom().Exits[i] == Directions.AreaChange)
+            if (player.CurrentRoom.Exits[i] == Directions.AreaChange)
             {
-                sb.Append($"Go to {player.GetCurrentRoom().ConnectedRegion} (leave)");
+                sb.Append($"Go to {player.CurrentRoom.ConnectedRegion} (leave)");
                 continue;
             }
-            sb.Append($"Go {player.GetCurrentRoom().Exits[i]}\n");
+            sb.Append($"Go {player.CurrentRoom.Exits[i]}\n");
         };
 
-        table.AddColumn(new TableColumn("Choose a direction")).Centered();
+        table.AddColumn(new TableColumn("Choose a direction"));
         table.AddRow(new Markup(sb.ToString()));
         table.Border = TableBorder.Simple;
 
@@ -141,12 +173,23 @@ public static class UI
         string region = player.CurrentRegion.ToString().Substring(23);
 
         var panel = new Panel(region);
-        panel.Header = new PanelHeader("Entering").Centered();
+        panel.Header = new PanelHeader("Entering");
         panel.Border = BoxBorder.Double;
 
         Console.Clear();
 
         return panel;
+    }
+
+    private static IRenderable DrawMenu(Player player)
+    {
+        Table table = new Table();
+        
+        table.AddColumn("Choose an option");
+        table.AddRow("Save");
+        table.AddRow("Main Menu (quit)");
+
+        return table;
     }
 
     private static void DrawScene(IEnumerable<Dialogue> json)
@@ -157,6 +200,12 @@ public static class UI
         {
             if (!item.Name.Equals(""))
             {
+                if (item.Name.Equals("Player"))
+                {
+                    AnsiConsole.MarkupLine($"[blue]{item.Name}[/]: {item.Text}\n");
+                    Console.ReadLine();
+                    continue;
+                }
                 Console.WriteLine($"{item.Name}: {item.Text}\n");
             }
 

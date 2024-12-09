@@ -1,0 +1,49 @@
+{
+    "dialogue": 
+    [
+        {
+            "name": "",
+            "text": "You awaken in a large field surrounded by flowers and odd flora you don't recognize"
+        },
+        {
+            "name": "Player",
+            "text": "Uurgh, where am I"
+        },
+        {
+            "name": "",
+            "text": "You're light headed and can't remember much." 
+        },
+        {
+            "name": "Distant Voice",
+            "text": "HEEEEEEYYY, YOU THERE!"
+        },
+        {
+            "name": "",
+            "text": "You hear someone calling for you from a distance"
+        },
+        {
+            "name": "Stranger",
+            "text": "You lost pal, haven't seen your face before. You look injured, are you okay?"
+        },
+        {
+            "name": "",
+            "text": "Asked the man that appears to be local...hunter, maybe, you aren't sure"
+        },
+        {
+            "name": "Player",
+            "text": "Uhh, yeah. I'm fine. Where..Where am I?"
+        },
+        {
+            "name": "Man",
+            "text": "Where are you? We're at [???] plains, near [town name]. You someplace to go? I can bring you to mu hut get some food"
+        },
+        {
+            "name": "Player",
+            "text": "Sure, that would be great, lead the way"
+        },
+        {
+            "name": "Man",
+            "text": "Alright then follow me"
+        }
+    ]
+}

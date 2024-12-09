@@ -1,0 +1,13 @@
+{
+  "Flags": [],
+  "Name": "John",
+  "Position": {
+    "X": 1,
+    "Y": 1
+  },
+  "PreviousPosition": {
+    "X": 0,
+    "Y": 1
+  },
+  "CurrentRegionName": "Fields"
+}
