@@ -1,0 +1,8 @@
+"filename", "language", "C#", "JSON", "comment", "blank", "total"
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exceptions.cs", "C#", 6, 0, 0, 3, 9
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Input.cs", "C#", 19, 0, 0, 3, 22
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Player.cs", "C#", 8, 0, 0, 1, 9
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\SaveManager.cs", "C#", 0, 0, 0, 2, 2
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Saves\PlayerSave.json", "JSON", 0, 1, 0, 0, 1
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\UI.cs", "C#", 9, 0, 0, 2, 11
+"Total", "-", 42, 1, 0, 11, 54

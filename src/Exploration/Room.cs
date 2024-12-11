@@ -1,19 +1,19 @@
-using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using TextAdventure.Interactibles;
+using TextAdventure.Dialogue;
 
 namespace TextAdventure.Location;
 
 public class Room
 {
-    public Directions[] Exits { get; }
-    public readonly OverWorld.RegionTable ConnectedRegion;
-    public readonly string Description;
-    public Scene Scene { get; }
-    public Item Key { get; }
+    public Directions[] Exits { get; private set; }
+    public OverWorld.RegionTable ConnectedRegion { get; private set; }
+    public string Description { get; private set; }
+    public Scene Scene { get; private set; }
+    public Item Key { get; private set; }
     public bool Locked = false;
     public List<IInteractable> Items { get; private set; } = new List<IInteractable>();
+
 
     /// <summary>
     /// Make a new room
@@ -25,46 +25,63 @@ public class Room
     /// <param name="items">List of items in the room</param>>
     /// <param name="key">Necessary item to continue</param>>
     /// <param name="locked">Sets if the room is locked or not</param>
-    public Room(Directions[] exits, string description, Scene scene, OverWorld.RegionTable connectedRegion,
-        List<IInteractable> items, Item key, bool locked)
-    {
-        Exits = exits;
-        Description = description;
-        Scene = scene;
-        ConnectedRegion = connectedRegion;
-        Items = items;
-        Key = key;
-        Locked = locked;
-    }
+    private Room() { }
 
-    public Room(Directions[] exits, string description, OverWorld.RegionTable connectedRegion, Item key, bool locked)
+    public class Builder
     {
-        Exits = exits;
-        Description = description;
-        ConnectedRegion = connectedRegion;
-        Key = key;
-        Locked = locked;
-    }
+        private readonly Room room;
 
-    public Room(Directions[] exits, string description, Scene scene = null)
-    {
-        Exits = exits;
-        Description = description;
-        Scene = scene;
-    }
+        public Builder()
+        {
+            room = new Room();
+        }
 
-    public Room(Directions[] exits, string description, OverWorld.RegionTable connectedRegion)
-    {
-        Exits = exits;
-        Description = description;
-        ConnectedRegion = connectedRegion;
-    }
+        public Builder AddExits(Directions[] exits)
+        {
+            room.Exits = exits;
+            return this;
+        }
 
-    public Room(Directions[] exits, string description, List<IInteractable> items)
-    {
-        Exits = exits;
-        Description = description;
-        Items = items;
+        public Builder AddDescription(string description)
+        {
+            room.Description = description;
+            return this;
+        }
+
+        public Builder AddScene(Scene scene)
+        {
+            room.Scene = scene;
+            return this;
+        }
+
+        public Builder AddConnectedRegion(OverWorld.RegionTable connectedRegion)
+        {
+            room.ConnectedRegion = connectedRegion;
+            return this;
+        }
+
+        public Builder AddItems(List<IInteractable> items)
+        {
+            room.Items = items;
+            return this;
+        }
+
+        public Builder AddKey(Item key)
+        {
+            room.Key = key;
+            return this;
+        }
+
+        public Builder SetLocked(bool locked)
+        {
+            room.Locked = locked;
+            return this;
+        }
+
+        public Room Build()
+        {
+            return room;
+        }
     }
 
     public bool ContainsScene()

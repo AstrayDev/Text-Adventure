@@ -7,12 +7,10 @@ public class Mountains : Region
         AddRoom
         (
             new Position(startPosition.X, startPosition.Y),
-            new Room
-            (
-                [Directions.AreaChange],
-                "Beeeeg Mountain",
-                OverWorld.RegionTable.Fields
-            )
+            new Room.Builder()
+            .AddExits([Directions.AreaChange])
+            .AddDescription("Beeeeg Mountain")
+            .AddConnectedRegion(OverWorld.RegionTable.Fields)
         );
     }
 }

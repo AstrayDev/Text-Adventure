@@ -1,0 +1,24 @@
+"filename", "language", "C#", "JSON", "comment", "blank", "total"
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exceptions.cs", "C#", 6, 0, 0, 3, 9
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Directions.cs", "C#", 9, 0, 0, 0, 9
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\OverWorld.cs", "C#", 10, 0, 0, 2, 12
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Position.cs", "C#", 11, 0, 3, 2, 16
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Regions.cs", "C#", 42, 0, 13, 5, 60
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Regions\Fields.cs", "C#", 41, 0, 0, 4, 45
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Regions\Mountains.cs", "C#", 17, 0, 0, 1, 18
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Exploration\Room.cs", "C#", 56, 0, 10, 8, 74
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Input.cs", "C#", 245, 0, 10, 49, 304
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\Examinable.cs", "C#", 17, 0, 0, 4, 21
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\Examinables\Stone.cs", "C#", 12, 0, 0, 3, 15
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\IInteractable.cs", "C#", 7, 0, 0, 2, 9
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\Item.cs", "C#", 17, 0, 0, 4, 21
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Interactibles\Items\Key.cs", "C#", 12, 0, 0, 3, 15
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Player.cs", "C#", 68, 0, 4, 10, 82
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Program.cs", "C#", 18, 0, 0, 3, 21
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\SaveManager.cs", "C#", 38, 0, 0, 9, 47
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Saves\PlayerSave.json", "JSON", 0, 14, 0, 0, 14
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Scenes\Dialogue.cs", "C#", 37, 0, 5, 5, 47
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Scenes\Dialogue\Dialogue.json", "JSON", 0, 49, 0, 0, 49
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\Scenes\SceneFlags.cs", "C#", 4, 0, 0, 0, 4
+"c:\Users\darks\Documents\VSCode Projects\Text-Adventure\src\UI.cs", "C#", 190, 0, 1, 41, 232
+"Total", "-", 857, 63, 46, 158, 1124

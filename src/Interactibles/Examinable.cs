@@ -1,4 +1,5 @@
 using System;
+using TextAdventure.Player;
 
 namespace TextAdventure.Interactibles;
 
@@ -13,7 +14,7 @@ public class Examinable : IInteractable
         Description = description;
     }
 
-    public virtual void Interact()
+    public virtual void Interact(Player.Player player)
     {
         Console.WriteLine($"It's a {Name}");
         Console.WriteLine($"{Description}");

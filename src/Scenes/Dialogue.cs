@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using TextAdventure.Player;
+
+namespace TextAdventure.Dialogue;
 
 public struct Dialogue
 {
     public string Name { get; init; }
     public string Text { get; init; }
 }
-
 public class Scene
 {
     public IEnumerable<Dialogue> Text;
@@ -40,7 +42,7 @@ public class Scene
             });
         }
     }
-    public bool ShouldScenePlay(Player player)
+    public bool ShouldScenePlay(Player.Player player)
     {
         return player.Flags.Contains(Flag) && player.CurrentRoom.ContainsScene() ? true : false;
     }

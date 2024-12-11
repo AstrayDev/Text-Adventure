@@ -1,4 +1,6 @@
 public enum SceneFlags
 {
-    FieldsIntro
+    None,
+    FieldsIntro,
+    FieldsHasRelic
 }

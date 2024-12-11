@@ -1,11 +1,8 @@
-using System;
-using TextAdventure.Player;
-
 namespace TextAdventure.Interactibles;
 
-public class Stone : Examinable
+public class Relic : Item
 {
-    public Stone(string name, string description) : base(name, description)
+    public Relic(string name, string description, SceneFlags flag) : base(name, description, flag)
     {
     }
 

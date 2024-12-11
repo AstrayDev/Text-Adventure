@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using Spectre.Console;
 using Spectre.Console.Rendering;
+using TextAdventure.Dialogue;
 using TextAdventure.Player;
 
 public enum UIStates
 {
     MainMenu,
+    CharacterCreation,
     Action,
     Move,
     AreaTransition,
@@ -37,7 +39,7 @@ public static class UI
 
     public static void Draw(Player player)
     {
-        if (State != UIStates.Scene && State != UIStates.MainMenu)
+        if (State != UIStates.Scene && State != UIStates.MainMenu && State != UIStates.CharacterCreation)
         {
             var panel = new Panel(player.CurrentRoom.Description);
             AnsiConsole.Write(panel);
@@ -46,6 +48,10 @@ public static class UI
         {
             case UIStates.MainMenu:
                 CurrentUI = DrawMainMenu();
+                break;
+
+            case UIStates.CharacterCreation:
+                DrawCharacterCreationMenu();
                 break;
 
             case UIStates.Action:
@@ -73,7 +79,7 @@ public static class UI
                 break;
 
             case UIStates.Scene:
-                DrawScene(player.CurrentRoom.Scene.Text);
+                DrawScene(player.CurrentRoom.Scene.Text, player);
                 player.Flags.Remove(player.CurrentRoom.Scene.Flag);
                 CurrentUI = DrawActionMenu();
                 break;
@@ -81,7 +87,7 @@ public static class UI
         AnsiConsole.Write(CurrentUI);
     }
 
-    public static IRenderable DrawMainMenu()
+    private static IRenderable DrawMainMenu()
     {
         var table = new Table();
 
@@ -89,6 +95,11 @@ public static class UI
         table.Border = TableBorder.Double;
 
         return table;
+    }
+
+    private static IRenderable DrawCharacterCreationMenu()
+    {
+        return new Panel("Character Creation");
     }
 
     private static IRenderable DrawActionMenu()
@@ -134,7 +145,7 @@ public static class UI
         {
             for (int i = 0; i < player.Items.Count; i++)
             {
-                table.AddRow(player.Items[i].ToString().Substring(28));
+                table.AddRow(player.Items[i].Name);
             }
         }
         else
@@ -172,27 +183,29 @@ public static class UI
         // Remove the namespace from region name
         string region = player.CurrentRegion.ToString().Substring(23);
 
-        var panel = new Panel(region);
-        panel.Header = new PanelHeader("Entering");
-        panel.Border = BoxBorder.Double;
+        var table = new Table();
+        table.Border = TableBorder.SimpleHeavy;
+        table.AddColumn($"Entering {region}");
+        table.AddRow("Save?");
+
+        Console.WriteLine("Save?");
 
         Console.Clear();
 
-        return panel;
+        return table;
     }
 
     private static IRenderable DrawMenu(Player player)
     {
         Table table = new Table();
-        
+
         table.AddColumn("Choose an option");
-        table.AddRow("Save");
         table.AddRow("Main Menu (quit)");
 
         return table;
     }
 
-    private static void DrawScene(IEnumerable<Dialogue> json)
+    private static void DrawScene(IEnumerable<Dialogue> json, Player player)
     {
         Console.ReadLine();
 
@@ -202,7 +215,7 @@ public static class UI
             {
                 if (item.Name.Equals("Player"))
                 {
-                    AnsiConsole.MarkupLine($"[blue]{item.Name}[/]: {item.Text}\n");
+                    AnsiConsole.MarkupLine($"[blue]{player.Name}[/]: {item.Text}\n");
                     Console.ReadLine();
                     continue;
                 }
@@ -216,6 +229,7 @@ public static class UI
 
             Console.ReadLine();
         }
-        State = UIStates.Action;
+        Console.Clear();
+        SetState(UIStates.Action);
     }
 }

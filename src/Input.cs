@@ -4,6 +4,10 @@ using Spectre.Console;
 using TextAdventure.Location;
 using TextAdventure.Interactibles;
 using TextAdventure.Save;
+using TextAdventure.Exceptions;
+using System.Diagnostics.Contracts;
+using System.IO;
+using System.Collections;
 
 namespace TextAdventure.Player;
 
@@ -24,6 +28,11 @@ public static class Input
                 MainMenuInput(ref player);
                 break;
 
+            case UIStates.CharacterCreation:
+                CharacterCreationInput(player);
+                player.NewGameSetup();
+                break;
+
             case UIStates.Action:
                 ActionMenuInput();
                 break;
@@ -41,7 +50,7 @@ public static class Input
                 break;
 
             case UIStates.AreaTransition:
-                AreaTransitionInput();
+                AreaTransitionInput(player);
                 break;
 
             case UIStates.Menu:
@@ -65,18 +74,21 @@ public static class Input
         switch (input)
         {
             case "New Game":
-                player.Name = "John";
-                player.Position = new Position(0, 0);
-                player.Flags.Add(SceneFlags.FieldsIntro);
-                player.ChangeRegion("Fields", false);
-                player.CurrentRegionName = "Fields";
-                UI.SetState(UIStates.Action);
+                UI.SetState(UIStates.CharacterCreation);
                 break;
 
             case "Load":
-                player = SaveManager.Load<Player>("src\\Saves\\PlayerSave.json");
-                player.LoadSetup(true);
-                UI.SetState(UIStates.Action);
+                try
+                {
+                    player = SaveManager.Load<Player>("src\\Saves\\PlayerSave.json");
+                    player.Load(true);
+                    UI.SetState(UIStates.Action);
+                }
+                catch (SaveException e)
+                {
+                    AnsiConsole.MarkupLine($"[red]{e.Message}[/]");
+                    Console.ReadLine();
+                }
                 break;
 
             case "Quit":
@@ -87,6 +99,16 @@ public static class Input
                 Console.WriteLine("How did you even mess this up?");
                 break;
         }
+    }
+
+    private static void CharacterCreationInput(Player player)
+    {
+        var input = AnsiConsole.Prompt
+        (
+            new TextPrompt<string>("Enter your name: ")
+        );
+
+        player.Name = input;
     }
 
     private static void ActionMenuInput()
@@ -129,7 +151,7 @@ public static class Input
 
             if (interactable != null)
             {
-                interactable.Interact();
+                interactable.Interact(player);
 
                 if (interactable is Item)
                 {
@@ -161,9 +183,25 @@ public static class Input
         UI.SetState(UIStates.Action);
     }
 
-    private static void AreaTransitionInput()
+    private static void AreaTransitionInput(Player player)
     {
-        Console.ReadLine();
+        var input = AnsiConsole.Prompt
+        (
+            new SelectionPrompt<string>()
+            .AddChoices("Yes", "No")
+        );
+
+        switch (input)
+        {
+            case "Yes":
+                SaveManager.Save("src\\Saves\\PlayerSave.json", player);
+                AnsiConsole.MarkupLine("[green]Save Succesfull![/]");
+                Console.ReadLine();
+                break;
+
+            case "No":
+                break;
+        }
         UI.SetState(UIStates.Action);
     }
 
@@ -176,12 +214,6 @@ public static class Input
 
         switch (input)
         {
-            case "save":
-                SaveManager.Save("src\\Saves\\PlayerSave.json", player);
-                AnsiConsole.MarkupLine("[green]Save Succesfull![/]");
-                Console.ReadLine();
-                break;
-
             case "quit":
                 UI.SetState(UIStates.MainMenu);
                 break;

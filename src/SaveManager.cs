@@ -1,45 +1,47 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using Spectre.Console;
+using TextAdventure.Exceptions;
 
 namespace TextAdventure.Save;
 
 public static class SaveManager
 {
-    public static void Save<T>(string filePath, T objectToSave) where T : new()
+    public static void Save<T>(string filePath, T objectToSave)
     {
         try
         {
-            var fileToSave = JsonConvert.SerializeObject(objectToSave, Formatting.Indented);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+
+            var fileToSave = JsonConvert.SerializeObject(objectToSave, Formatting.Indented, settings);
 
             using (TextWriter writer = new StreamWriter(filePath, false))
             {
                 writer.Write(fileToSave);
             }
         }
-        catch (Exception ex)
+        catch (ArgumentOutOfRangeException)
         {
-            Console.WriteLine($"Couldn't save: {ex.Message}");
+            AnsiConsole.MarkupLine($"[red]An error occurred when saving[/]");
         }
     }
 
 
-    public static T Load<T>(string filePath) where T : new()
+    public static T Load<T>(string filePath)
     {
         using (TextReader reader = new StreamReader(filePath))
         {
-            try
-            {
-                string contentToLoad = reader.ReadToEnd();
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
 
-                return JsonConvert.DeserializeObject<T>(contentToLoad);
+            string contentToLoad = reader.ReadToEnd();
+
+            if (contentToLoad == "" || !File.Exists(filePath))
+            {
+                throw new SaveException("Save is empty");
             }
 
-            catch (Exception e)
-            {
-                Console.WriteLine("Couldn't load save");
-                return default;
-            }
+            return JsonConvert.DeserializeObject<T>(contentToLoad, settings);
         }
     }
 }

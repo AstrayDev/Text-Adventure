@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TextAdventure.Location;
 
@@ -8,7 +9,9 @@ public abstract class Region
     public string Name { get; private set; }
     public List<List<Room>> Rooms = new List<List<Room>>();
     public readonly Position StartPosition;
+    [JsonIgnore]
     private int MaxX;
+    [JsonIgnore]
     private int MaxY;
 
     /// <summary>
@@ -42,13 +45,13 @@ public abstract class Region
     /// </summary>
     /// <param name="room">Room to add to region</param>
     /// <param name="position">Position to create room</param>
-    protected void AddRoom(Position position, Room room)
+    protected void AddRoom(Position position, Room.Builder room)
     {
         try
         {
             if (Rooms[position.X][position.Y] == null)
             {
-                Rooms[position.X][position.Y] = room;
+                Rooms[position.X][position.Y] = room.Build();
             }
         }
         catch (ArgumentOutOfRangeException e)

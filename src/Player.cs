@@ -6,7 +6,6 @@ using TextAdventure.Location;
 
 namespace TextAdventure.Player;
 
-[Serializable]
 public class Player
 {
     public string Name { get; set; }
@@ -18,7 +17,6 @@ public class Player
     [JsonIgnore]
     public Room CurrentRoom { get; set; }
     public List<SceneFlags>? Flags = new List<SceneFlags>();
-    [JsonIgnore]
     public List<Item> Items = new List<Item>();
 
     public Player()
@@ -31,7 +29,16 @@ public class Player
         Position = position;
     }
 
-    public void LoadSetup(bool loadUp)
+    public void NewGameSetup()
+    {
+        ChangeRegion("Fields", false);
+        Position = CurrentRegion.StartPosition;
+        Flags.Add(SceneFlags.FieldsIntro);
+        CurrentRegionName = "Fields";
+        UI.SetState(UIStates.Scene);
+    }
+
+    public void Load(bool loadUp)
     {
         ChangeRegion(CurrentRegionName, loadUp);
         CurrentRoom = CurrentRegion.Rooms[Position.X][Position.Y];
@@ -49,7 +56,7 @@ public class Player
     }
 
     public void ChangeRegion(string region, bool loadUp)
-    {
+        {
         Region newRegion = null;
         switch (region)
         {
