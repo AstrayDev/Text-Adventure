@@ -16,15 +16,8 @@ public class Room
 
 
     /// <summary>
-    /// Make a new room
+    /// Make a new room using a builder to allow individual componets to be addes easily
     /// </summary>
-    /// <param name="exits">Exits to assign</param>
-    /// <param name="description">Room descitpion</param>
-    /// <param name="scene">Scene for the room to play</param>
-    /// <param name="connectedRegion">Region that you can switch to</param>>
-    /// <param name="items">List of items in the room</param>>
-    /// <param name="key">Necessary item to continue</param>>
-    /// <param name="locked">Sets if the room is locked or not</param>
     private Room() { }
 
     public class Builder

@@ -1,24 +1,14 @@
 {
-  "Flags": [
-    0,
-    0
-  ],
-  "Items": [
-    {
-      "$type": "TextAdventure.Interactibles.Relic, Text-Adventure",
-      "Name": "Relic",
-      "Description": "An odd relic",
-      "Flag": 2
-    }
-  ],
-  "Name": "Joe",
+  "Flags": [],
+  "Items": [],
+  "Name": "P",
   "Position": {
     "X": 0,
     "Y": 0
   },
   "PreviousPosition": {
-    "X": 0,
-    "Y": 1
+    "X": 1,
+    "Y": 0
   },
-  "CurrentRegionName": "Mountains"
+  "CurrentRegionName": "Dungeon"
 }

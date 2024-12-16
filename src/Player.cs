@@ -16,7 +16,7 @@ public class Player
     public Region CurrentRegion { get; set; }
     [JsonIgnore]
     public Room CurrentRoom { get; set; }
-    public List<SceneFlags>? Flags = new List<SceneFlags>();
+    public List<SceneFlags?> Flags = new List<SceneFlags?>();
     public List<Item> Items = new List<Item>();
 
     public Player()
@@ -31,10 +31,11 @@ public class Player
 
     public void NewGameSetup()
     {
-        ChangeRegion("Fields", false);
+        Name = "P";
+        ChangeRegion("Cavern", false);
         Position = CurrentRegion.StartPosition;
-        Flags.Add(SceneFlags.FieldsIntro);
-        CurrentRegionName = "Fields";
+        Flags.Add(SceneFlags.Intro);
+        CurrentRegionName = "Cavern";
         UI.SetState(UIStates.Scene);
     }
 
@@ -60,12 +61,12 @@ public class Player
         Region newRegion = null;
         switch (region)
         {
-            case "Fields":
-                newRegion = new Fields("Fields", new Position(0, 0), 5, 5);
+            case "Cavern":
+                newRegion = new Cavern("Cavern", new Position(1, 0), 5, 5);
                 break;
 
-            case "Mountains":
-                newRegion = new Mountains("Mountains", new Position(0, 0), 5, 5);
+            case "Dungeon":
+                newRegion = new Dungeon("Dungeon", new Position(0, 0), 5, 5);
                 break;
         }
 

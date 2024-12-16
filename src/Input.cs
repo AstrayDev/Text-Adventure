@@ -5,9 +5,6 @@ using TextAdventure.Location;
 using TextAdventure.Interactibles;
 using TextAdventure.Save;
 using TextAdventure.Exceptions;
-using System.Diagnostics.Contracts;
-using System.IO;
-using System.Collections;
 
 namespace TextAdventure.Player;
 
@@ -26,11 +23,6 @@ public static class Input
         {
             case UIStates.MainMenu:
                 MainMenuInput(ref player);
-                break;
-
-            case UIStates.CharacterCreation:
-                CharacterCreationInput(player);
-                player.NewGameSetup();
                 break;
 
             case UIStates.Action:
@@ -74,7 +66,7 @@ public static class Input
         switch (input)
         {
             case "New Game":
-                UI.SetState(UIStates.CharacterCreation);
+                player.NewGameSetup();
                 break;
 
             case "Load":
@@ -99,16 +91,6 @@ public static class Input
                 Console.WriteLine("How did you even mess this up?");
                 break;
         }
-    }
-
-    private static void CharacterCreationInput(Player player)
-    {
-        var input = AnsiConsole.Prompt
-        (
-            new TextPrompt<string>("Enter your name: ")
-        );
-
-        player.Name = input;
     }
 
     private static void ActionMenuInput()
@@ -289,7 +271,7 @@ public static class Input
             {
                 if (!player.Items.Any(item => item.GetType() == player.CurrentRoom.Key.GetType()))
                 {
-                    Console.WriteLine("EEERRRRRRRRR");
+                    Console.WriteLine(player.CurrentRoom.Key.Description);
                     Console.ReadLine();
                     player.Move(player.PreviousPosition);
                     return;

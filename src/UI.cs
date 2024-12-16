@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -10,7 +9,6 @@ using TextAdventure.Player;
 public enum UIStates
 {
     MainMenu,
-    CharacterCreation,
     Action,
     Move,
     AreaTransition,
@@ -39,7 +37,7 @@ public static class UI
 
     public static void Draw(Player player)
     {
-        if (State != UIStates.Scene && State != UIStates.MainMenu && State != UIStates.CharacterCreation)
+        if (State != UIStates.Scene && State != UIStates.MainMenu)
         {
             var panel = new Panel(player.CurrentRoom.Description);
             AnsiConsole.Write(panel);
@@ -48,10 +46,6 @@ public static class UI
         {
             case UIStates.MainMenu:
                 CurrentUI = DrawMainMenu();
-                break;
-
-            case UIStates.CharacterCreation:
-                DrawCharacterCreationMenu();
                 break;
 
             case UIStates.Action:
@@ -95,11 +89,6 @@ public static class UI
         table.Border = TableBorder.Double;
 
         return table;
-    }
-
-    private static IRenderable DrawCharacterCreationMenu()
-    {
-        return new Panel("Character Creation");
     }
 
     private static IRenderable DrawActionMenu()

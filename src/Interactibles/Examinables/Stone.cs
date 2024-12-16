@@ -1,6 +1,3 @@
-using System;
-using TextAdventure.Player;
-
 namespace TextAdventure.Interactibles;
 
 public class Stone : Examinable

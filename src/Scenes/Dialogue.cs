@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json.Serialization;
+using Spectre.Console;
 using Newtonsoft.Json.Linq;
-using TextAdventure.Player;
 
 namespace TextAdventure.Dialogue;
 

@@ -1,8 +1,5 @@
 ﻿using System;
-using TextAdventure.Location;
-using Region = TextAdventure.Location.Region;
 using TextAdventure.Player;
-using TextAdventure.Save;
 
 class Program
 {

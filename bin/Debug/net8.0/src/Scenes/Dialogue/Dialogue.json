@@ -2,48 +2,48 @@
     "dialogue": 
     [
         {
-            "name": "",
-            "text": "You awaken in a large field surrounded by flowers and odd flora you don't recognize"
+            "name": "Timid boy",
+            "text": "Sooo...you ready to go in?"
+        },
+        {
+            "name": "Aggravated boy",
+            "text": "Yeah, just give me a moment T, jeez. I'm...looking for anything I can use as a weapon, y'now in case there's anything dangerous..."
+        },
+        {
+            "name": "T",
+            "text": "But you've been just staring at the cave door for a few minutes now. I only came because you made me so if you're not going in I'm going home" 
         },
         {
             "name": "Player",
-            "text": "Uurgh, where am I"
-        },
-        {
-            "name": "",
-            "text": "You're light headed and can't remember much." 
-        },
-        {
-            "name": "Distant Voice",
-            "text": "HEEEEEEYYY, YOU THERE!"
-        },
-        {
-            "name": "",
-            "text": "You hear someone calling for you from a distance"
-        },
-        {
-            "name": "Stranger",
-            "text": "You lost pal, haven't seen your face before. You look injured, are you okay?"
-        },
-        {
-            "name": "",
-            "text": "Asked the man that appears to be local...hunter, maybe, you aren't sure"
+            "text": "FINE! Let me unlock the door"
         },
         {
             "name": "Player",
-            "text": "Uhh, yeah. I'm fine. Where..Where am I?"
+            "text": "Uhhhh, where's the key?"
         },
         {
-            "name": "Man",
-            "text": "Where are you? We're at [???] plains, near [town name]. You someplace to go? I can bring you to mu hut get some food"
+            "name": "T",
+            "text": "What do you mean?"
         },
         {
             "name": "Player",
-            "text": "Sure, that would be great, lead the way"
+            "text": "ARRGGHH, THE KEY! I think I dropped it"
         },
         {
-            "name": "Man",
-            "text": "Alright then follow me"
+            "name": "T",
+            "text": "You think maybe you dropped it when were messing aroung those fallen trees earlier?"
+        },
+        {
+            "name": "Player",
+            "text": "Yeah you're right. Probably happened when you PUSHED ME off of it!"
+        },
+        {
+            "name": "T",
+            "text": "It was an accident!"
+        },
+        {
+            "name": "Player",
+            "text": "Whatever, let's just go look"
         }
     ]
 }
