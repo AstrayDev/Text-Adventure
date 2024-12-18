@@ -22,7 +22,7 @@ public class Cavern : Region
             new Position(0, 0),
             new Room.Builder()
             .AddExits([Directions.East])
-            .AddDescription("A small opening with lots of fallen trees you playing on earlier")
+            .AddDescription("A small opening with lots of fallen trees you were playing on earlier")
             .AddItems(new List<IInteractable> {new Key("Key", "The key to the old door of the cavern")})
         );
 

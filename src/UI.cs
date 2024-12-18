@@ -196,6 +196,12 @@ public static class UI
 
     private static void DrawScene(IEnumerable<Dialogue> json, Player player)
     {
+        if (json == null)
+        {
+            Console.WriteLine("Dialogue file empty");
+            SetState(UIStates.Action);
+            return;
+        }
         Console.ReadLine();
 
         foreach (var item in json)

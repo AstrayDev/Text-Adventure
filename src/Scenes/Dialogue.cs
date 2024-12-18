@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Spectre.Console;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace TextAdventure.Dialogue;
 
@@ -18,7 +19,11 @@ public class Scene
 
     public Scene(string file, SceneFlags flag)
     {
-        Text = LoadJson(file);
+        try
+        {
+            Text = LoadJson(file);
+        }
+        catch (NullReferenceException) { Console.WriteLine("Dialogue file is empty"); }
         Flag = flag;
     }
 
@@ -33,6 +38,10 @@ public class Scene
         {
             string jsonText = reader.ReadToEnd();
 
+            if (reader.ReadToEnd() == "")
+            {
+                throw new NullReferenceException();
+            }
             return JObject.Parse(jsonText)["dialogue"]
             .Select(d => new Dialogue
             {

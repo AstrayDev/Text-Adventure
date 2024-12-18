@@ -1,0 +1,5 @@
+.VSCodeCounter
+.vscode
+.idea
+bin
+obj
